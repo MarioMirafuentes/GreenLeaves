@@ -1,0 +1,28 @@
+.titleContainer {
+    background-color: rgb(96, 236, 96);
+
+    height: 10rem;
+    border-radius: 2rem !important;
+}
+
+.title {
+    color: white;
+    font-family: sans-serif;
+    padding-left: 3rem;
+    padding-top: 3rem;
+
+}
+
+.imageHoja {
+    width: 150px;
+    height: auto;
+    padding-top: 2rem;
+    padding-left: 2rem;
+}
+
+.searchList {
+    overflow: scroll;
+    height: 200px;
+    width: 500px;
+    position: relative;
+}

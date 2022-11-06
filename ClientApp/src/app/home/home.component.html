@@ -1,0 +1,124 @@
+﻿<html>
+
+<head>
+  <title>Green Leaves</title>
+</head>
+
+<body>
+  <div class="titleContainer row col-8">
+    <div class="col-6">
+      <h1 class="title">Green Leaves</h1>
+    </div>
+    <div class="col-2">
+      <img class="imageHoja" src="assets/image/hoja1.png">
+    </div>
+  </div>
+
+  <form [formGroup]="FormContacto">
+    <div class="row col-12" style="margin-top:5rem;">
+      <div class="col-2">
+        <label>Nombre :</label>
+      </div>
+      <div class="col-4">
+        <input style="width:20rem" type="text" formControlName="nombre" />
+      </div>
+      <div class="col-2">
+        <p *ngIf="FormContacto.controls['nombre'].errors?.required" class=" alert alert-danger" role="alert"
+          style="height:.8rem;width: 10rem;font-size:x-small;margin-left: -2.5rem;"> El dato es incorrecto
+        </p>
+        <p *ngIf=" !FormContacto.controls['nombre'].errors?.required" class=" alert alert-success" role="alert"
+          style="height:0.8rem;width: 10rem; font-size:x-small;margin-left: -2.5rem;">El dato es Correcto
+        </p>
+      </div>
+    </div>
+    <div class="row col-12">
+      <div class="col-2">
+        <label> E-mail :</label>
+      </div>
+      <div class="col-4">
+        <input #email (keyup)="ValidEmail(email)" style="width:20rem" type="email" formControlName="email" matInput
+          placeholder="Ex. pat@example.com">
+
+      </div>
+      <div class="col-2">
+        <p *ngIf="!mailValid" class=" alert alert-danger" role="alert"
+          style="height:.8rem;width: 10rem;font-size:x-small;margin-left: -2.5rem;"> El email es incorrecto
+        </p>
+        <p *ngIf="mailValid" class=" alert alert-success" role="alert"
+          style="height:0.8rem;width: 10rem; font-size:x-small;margin-left: -2.5rem;">El email es Correcto
+        </p>
+      </div>
+    </div>
+    <div class="row col-12">
+      <div class="col-2">
+        <label>Teléfono :</label>
+      </div>
+      <div class="col-4">
+
+        <input #telefono (blur)="format(telefono.value,'###-###-###-####')" type="text" style="width:20rem"
+          formControlName="telefono" placeholder="Solo numeros Pais(3) Telefono (10) ">
+
+      </div>
+      <div class="col-2">
+        <p *ngIf="!telValid" class=" alert alert-danger" role="alert"
+          style="height:.8rem;width: 10rem;font-size:x-small;margin-left: -2.5rem;"> El numero es incorrecto
+        </p>
+        <p *ngIf="telValid" class=" alert alert-success" role="alert"
+          style="height:0.8rem;width: 10rem; font-size:x-small;margin-left: -2.5rem;">El numero es Correcto
+        </p>
+      </div>
+    </div>
+    <div class="row col-12">
+      <div class="col-2">
+        <label>Fecha :</label>
+      </div>
+      <div class="col-4">
+        <input style="width:18rem" formControlName="fecha" readonly />
+        <input #date (change)="SelectDate(date)" style="width:1.5rem ;" type="date" />
+      </div>
+      <div class="col-2">
+        <p *ngIf="!dateValid" class=" alert alert-danger" role="alert"
+          style="height:.8rem;width: 10rem;font-size:x-small;margin-left: -2.5rem;"> La fecha es incorrecto
+        </p>
+        <p *ngIf="dateValid" class=" alert alert-success" role="alert"
+          style="height:0.8rem;width: 10rem; font-size:x-small;margin-left: -2.5rem;">La fecha es Correcto
+        </p>
+      </div>
+    </div>
+
+    <div class="row col-12">
+      <div class="col-2">
+        <label>Ciudad y Estado :</label>
+      </div>
+      <div class="col-4">
+
+        <div>
+          <input #city type="text" style="width:20rem" (keyup)="Search(city)" formControlName="ciudad" type="text"
+            name="search" [(ngModel)]="searchText" autocomplete="on">
+        </div>
+
+        <div *ngIf="searchActivate" class="searchList">
+          <ul *ngFor="let name of names | filter:searchText">
+            <span (click)=SelectCity(name)>{{name.name +", "+ name.adminName1+ ", "+ name.countryName }} </span>
+          </ul>
+        </div>
+      </div>
+      <div class="col-2">
+        <p *ngIf="FormContacto.controls['ciudad'].errors?.required" class=" alert alert-danger" role="alert"
+          style="height:.8rem;width: 10rem;font-size:x-small;margin-left: -2.5rem;"> El dato es incorrecto
+        </p>
+        <p *ngIf=" !FormContacto.controls['ciudad'].errors?.required" class=" alert alert-success" role="alert"
+          style="height:0.8rem;width: 10rem; font-size:x-small;margin-left: -2.5rem;">El dato es Correcto
+        </p>
+      </div>
+    </div>
+
+
+    <button (click)="SaveForm()" [disabled]="!FormContacto.valid && mailValid && telValid && dateValid ">Enviar</button>
+  </form>
+
+
+
+
+
+</body>
